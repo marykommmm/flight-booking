@@ -6,12 +6,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
 
-  // При першому завантаженні сторінки - перевіряємо токен і запитуємо /me
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       axios
-        .get("http://localhost:5000/api/users/me", {
+        .get("https://flight-booking-1-2gzk.onrender.com/api/users/me", {
           headers: { Authorization: `Bearer ${token}` },
         })
         .then((res) => setUser(res.data))
@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
   const login = (token) => {
     localStorage.setItem("token", token);
     axios
-      .get("http://localhost:5000/api/users/me", {
+      .get("https://flight-booking-1-2gzk.onrender.com/api/users/me", {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((res) => setUser(res.data))
