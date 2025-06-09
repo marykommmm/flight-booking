@@ -28,14 +28,14 @@ const SignUp = () => {
     }
 
     try {
-      await axios.post("http://localhost:5000/api/users/register", {
+      await axios.post("https://flight-booking-1-2gzk.onrender.com/api/users/register", {
         name: formData.name,
         email: formData.email,
         password: formData.password,
-        role: "user", // або "admin" за потреби
+        role: "user", // або "admin"
       });
 
-      navigate("/login"); // переходимо до логіну після успішної реєстрації
+      navigate("/login");
     } catch (err) {
       console.error("Sign up error", err.response?.data);
       setError(err.response?.data?.message || "Sign up failed");
