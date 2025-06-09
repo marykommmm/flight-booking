@@ -143,6 +143,10 @@ const AdminPanel = () => {
   };
 
   const handleEditFlight = (flight) => {
+    console.log("🛠 handleEditFlight called with:", flight);
+    console.log("departureTime raw:", flight.departureTime);
+    console.log("arrivalTime raw:", flight.arrivalTime);
+
     setFlightForm({
       flightNumber: flight.flightNumber,
       departure: flight.departure,

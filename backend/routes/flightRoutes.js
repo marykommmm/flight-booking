@@ -40,22 +40,35 @@ router.post("/", authMiddleware(), adminOnly, async (req, res) => {
 });
 
 // Оновити інформацію про рейс — ТІЛЬКИ АДМІН
-router.put("/:id", authMiddleware(), adminOnly, async (req, res) => {
-  console.log("Received PUT body:", req.body);
-
+router.put("/:id", authMiddleware(), async (req, res) => {
   try {
-    const flight = await Flight.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    console.log("Received PUT body:", req.body);
+    if (req.user.role !== "admin") {
+      return res.status(403).json({ message: "Access denied" });
+    }
 
-    if (!flight) return res.status(404).json({ message: "Flight not found" });
-    res.json(flight);
+    const flightId = req.params.id;
+
+    const updatedFlight = await Flight.findByIdAndUpdate(
+      flightId,
+      {
+        flightNumber: req.body.flightNumber,
+        departure: req.body.departure,
+        arrival: req.body.arrival,
+        departureTime: req.body.departureTime,
+        arrivalTime: req.body.arrivalTime,
+        price: req.body.price,
+        seatsAvailable: req.body.seatsAvailable,
+      },
+      { new: true }
+    );
+
+    if (!updatedFlight) {
+      return res.status(404).json({ message: "Flight not found" });
+    }
+
+    res.json(updatedFlight);
   } catch (err) {
-    res
-      .status(400)
-      .json({ message: "Error updating flight", error: err.message });
+    res.status(500).json({ message: "Server error", error: err.message });
   }
 });
 
