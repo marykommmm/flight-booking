@@ -43,7 +43,7 @@ const AdminPanel = () => {
       setLoading(true);
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/users/get-users",
+          "https://flight-booking-1-2gzk.onrender.com/api/users/get-users",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         setUsers(response.data);
@@ -57,7 +57,7 @@ const AdminPanel = () => {
       setBookingsLoading(true);
       try {
         const response = await axios.get(
-          "http://localhost:5000/api/bookings/all",
+          "https://flight-booking-1-2gzk.onrender.com/api/bookings/all",
           { headers: { Authorization: `Bearer ${token}` } }
         );
         console.log("Bookings response:", response.data); // Тут лог даних
@@ -71,7 +71,7 @@ const AdminPanel = () => {
     const fetchFlights = async () => {
       setFlightsLoading(true);
       try {
-        const response = await axios.get("http://localhost:5000/api/flights");
+        const response = await axios.get("https://flight-booking-1-2gzk.onrender.com/api/flights");
         setFlights(response.data);
       } catch {
         setFlightsError("Failed to load flights");
@@ -89,7 +89,7 @@ const AdminPanel = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:5000/api/users/${userId}`, {
+      await axios.delete(`https://flight-booking-1-2gzk.onrender.com/api/users/${userId}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers((prev) => prev.filter((u) => u._id !== userId));
@@ -110,13 +110,13 @@ const AdminPanel = () => {
     try {
       if (editingFlightId) {
         await axios.put(
-          `http://localhost:5000/api/flights/${editingFlightId}`,
+          `https://flight-booking-1-2gzk.onrender.com/api/flights/${editingFlightId}`,
           flightForm,
           { headers: { Authorization: `Bearer ${token}` } }
         );
         alert("Flight updated");
       } else {
-        await axios.post("http://localhost:5000/api/flights", flightForm, {
+        await axios.post("https://flight-booking-1-2gzk.onrender.com/api/flights", flightForm, {
           headers: { Authorization: `Bearer ${token}` },
         });
         alert("Flight created");
@@ -133,7 +133,7 @@ const AdminPanel = () => {
       });
       setEditingFlightId(null);
 
-      const res = await axios.get("http://localhost:5000/api/flights");
+      const res = await axios.get("https://flight-booking-1-2gzk.onrender.com/api/flights");
       setFlights(res.data);
     } catch (err) {
       alert(
@@ -143,7 +143,7 @@ const AdminPanel = () => {
   };
 
   const handleEditFlight = (flight) => {
-    console.log("🛠 handleEditFlight called with:", flight);
+    console.log("handleEditFlight called with:", flight);
     console.log("departureTime raw:", flight.departureTime);
     console.log("arrivalTime raw:", flight.arrivalTime);
 
@@ -164,7 +164,7 @@ const AdminPanel = () => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.delete(`http://localhost:5000/api/flights/${id}`, {
+      await axios.delete(`https://flight-booking-1-2gzk.onrender.com/api/flights/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setFlights((prev) => prev.filter((f) => f._id !== id));
@@ -181,7 +181,7 @@ const AdminPanel = () => {
     const token = localStorage.getItem("token");
 
     try {
-      await axios.delete(`http://localhost:5000/api/bookings/${id}`, {
+      await axios.delete(`https://flight-booking-1-2gzk.onrender.com/api/bookings/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setBookings((prev) => prev.filter((b) => b._id !== id));
