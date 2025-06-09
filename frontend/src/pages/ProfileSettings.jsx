@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { AuthContext } from "../components/AuthContext"; // поправ під свою структуру
+import { AuthContext } from "../components/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const ProfileSettings = () => {
@@ -27,7 +27,7 @@ const ProfileSettings = () => {
     try {
       const token = localStorage.getItem("token");
       await axios.put(
-        "http://localhost:5000/api/users/update-password",
+        "https://flight-booking-1-2gzk.onrender.com/api/users/update-password",
         { oldPassword, newPassword },
         {
           headers: { Authorization: `Bearer ${token}` },
@@ -52,7 +52,7 @@ const ProfileSettings = () => {
 
     try {
       const token = localStorage.getItem("token");
-      await axios.delete("http://localhost:5000/api/users/delete-account", {
+      await axios.delete("https://flight-booking-1-2gzk.onrender.com/api/users/delete-account", {
         headers: { Authorization: `Bearer ${token}` },
       });
       alert("Account deleted");
