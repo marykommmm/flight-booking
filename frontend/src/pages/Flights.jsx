@@ -89,7 +89,7 @@ const Flights = () => {
   useEffect(() => {
     const fetchFlights = async () => {
       try {
-        const response = await fetch("http://localhost:5000/api/flights");
+        const response = await fetch("https://flight-booking-1-2gzk.onrender.com/api/flights");
         if (!response.ok) throw new Error("Failed to fetch flights");
         const data = await response.json();
         setFlights(data);
@@ -107,7 +107,7 @@ const Flights = () => {
     if (!token) return alert("Please login to book a flight");
 
     try {
-      const response = await fetch("http://localhost:5000/api/bookings", {
+      const response = await fetch("https://flight-booking-1-2gzk.onrender.com/api/bookings", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
