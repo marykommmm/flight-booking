@@ -18,7 +18,7 @@ const MyBookings = () => {
       try {
         const token = localStorage.getItem("token");
         const response = await fetch(
-          "http://localhost:5000/api/bookings/my-bookings",
+          "https://flight-booking-1-2gzk.onrender.com/api/bookings/my-bookings",
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -51,7 +51,7 @@ const MyBookings = () => {
       const token = localStorage.getItem("token");
 
       const res = await fetch(
-        `http://localhost:5000/api/bookings/${bookingId}/cancel`,
+        `https://flight-booking-1-2gzk.onrender.com/api/bookings/${bookingId}/cancel`,
         {
           method: "PATCH",
           headers: {
