@@ -17,7 +17,7 @@ const Login = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:5000/api/users/login",
+        "https://flight-booking-1-2gzk.onrender.com/api/users/login",
         {
           email,
           password,
@@ -28,7 +28,7 @@ const Login = () => {
       localStorage.setItem("token", token);
 
       if (login) {
-        login(token); // або login(response.data.user), залежно від реалізації
+        login(token);
       }
 
       navigate("/");
